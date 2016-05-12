@@ -1,0 +1,351 @@
+<!--Brian Treichel & Alex Galka
+    A web app designed to list your games and consoles and what you are currently playing
+    Project Folder: AGBTFinalProject
+    File Name: index.html
+    Revision History: 10-04-2016 Created
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Brian Treichel & Alex Galka Gamezone</title>
+    <!--Style Sheet-->
+    <link type="text/css" rel="stylesheet" href="css/lib/jquery.mobile-1.4.5.css">
+    <!--My Stylesheet-->
+    <link type="text/css" rel="stylesheet" href="css/AGBTMyStyle.css">
+    <!--jQuery-->
+    <script src="js/lib/jquery-2.1.4.js"></script>
+    <!--jQuery Mobile-->
+    <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+    <!--jQuery Validator-->
+    <script src="js/lib/jquery.validate.js"></script>
+    <!--My JavaScripts-->
+    <script src="js/AGBTdatabase.js"></script>
+    <script src="js/AGBTDAL.js"></script>
+    <script src="js/AGBTutil.js"></script>
+    <script src="js/AGBTfacade.js"></script>
+    <script src="js/AGBTglobal.js"></script>
+</head>
+    <body>
+    <!--Page 0: The Title Page-->
+        <div data-role="page" id="AGBTTitlePage" data-theme="b">
+            <section data-role="content">
+                <h1>GAMERZONE</h1>
+                <button type="button" id="btnEnter" name="btnEnter" data-inline="false">Enter</button>
+                <h3>By Brian Treichel & Alex Galka</h3>
+            </section>
+        </div>
+    <!--Page 1: The games you are currently playing from your library-->
+        <div data-role="page" id="AGBTCurrentlyPlaying" data-theme="b">
+            <header data-role="header" data-position="fixed">
+                <h1>Currently Playing</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#AGBTCurrentlyPlaying" data-icon="bars"
+                               class="ui-btn-active ui-state-persist">Currently Playing</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyGames" data-icon="grid">My Games</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyConsoles" data-icon="gear">My Consoles</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTAboutPage" data-icon="eye" >About</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <ul id="AGBTCurrentList" data-role="listview" data-inset="true" data-icon="false">
+
+                </ul>
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <h4>&copy; 2016 Alex Galka & Brian Treichel</h4>
+            </footer>
+        </div>
+    <!--Page 2: The games page, add and view all your games here-->
+        <div data-role="page" id="AGBTMyGames" data-theme="b">
+            <header data-role="header" data-position="fixed">
+                <h1>Games</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#AGBTCurrentlyPlaying" data-icon="bars">Currently Playing</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyGames" data-icon="grid"
+                               class="ui-btn-active ui-state-persist">My Games</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyConsoles" data-icon="gear">My Consoles</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTAboutPage" data-icon="eye" >About</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <button type="button" id="btnAddGame" name="btnAddGame" data-inline="false" data-icon="plus">Add</button>
+                <ul id="AGBTGameList" data-role="listview" data-inset="true" data-icon="false">
+
+                </ul>
+                <button type="button" id="btnClearGames" name="btnClearGames" data-inline="false" data-icon="delete">Clear All Games</button>
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <h4>&copy; 2016 Alex Galka & Brian Treichel</h4>
+            </footer>
+        </div>
+    <!--Page 3: The consoles page, add and view your consoles here-->
+        <div data-role="page" id="AGBTMyConsoles" data-theme="b">
+            <header data-role="header" data-position="fixed">
+                <h1>Consoles</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#AGBTCurrentlyPlaying" data-icon="bars">Currently Playing</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyGames" data-icon="grid">My Games</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyConsoles" data-icon="gear"
+                               class="ui-btn-active ui-state-persist">My Consoles</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTAboutPage" data-icon="eye" >About</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <button type="button" id="btnAddConsole" name="btnAddConsole" data-inline="false" data-icon="plus">Add</button>
+                <ul id="AGBTConsoleList" data-role="listview" data-inset="true" data-icon="false">
+
+                </ul>
+                <button type="button" id="btnClearConsoles" name="btnClearConsoles" data-inline="false" data-icon="delete">Clear All Consoles</button>
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <h4>&copy; 2016 Alex Galka & Brian Treichel</h4>
+            </footer>
+        </div>
+    <!--Page 4: The about page, tells you about the developers of the app-->
+        <div data-role="page" id="AGBTAboutPage" data-theme="b">
+            <header data-role="header" data-position="fixed">
+                <h1>About the Developers</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#AGBTCurrentlyPlaying" data-icon="bars">Currently Playing</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyGames" data-icon="grid">My Games</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyConsoles" data-icon="gear">My Consoles</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTAboutPage" data-icon="eye"
+                               class="ui-btn-active ui-state-persist">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content" align="center">
+                <h1>Developers of Gamerzone</h1><br>
+                <h2>Alex Galka</h2>
+                <h4>agalka1632@conestogac.on.ca</h4><br>
+                <h2>Brian Treichel</h2>
+                <h4>btreichel8283@conestogac.on.ca</h4>
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <h4>&copy; 2016 Alex Galka & Brian Treichel</h4>
+            </footer>
+        </div>
+    <!--Page 5: Add games, specify details of the specific game-->
+        <div data-role="page" id="AGBTAddGame" data-theme="b">
+            <header data-role="header" data-position="fixed">
+                <h1>Add a Game</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#AGBTCurrentlyPlaying" data-icon="bars">Currently Playing</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyGames" data-icon="grid" class="ui-btn-active ui-state-persist">My Games</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyConsoles" data-icon="gear">My Consoles</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTAboutPage" data-icon="eye">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="frmAddGame" name="frmAddGame">
+                    <label for="txtTitle1">Title:</label>
+                    <input id="txtTitle1" name="txtTitle1" data-role="text box">
+                    <label for="cmboConsole1">Platform:</label>
+                    <select id="cmboConsole1" name="cmboConsole1" data-native-menu="false">
+                        <option value='0' selected>N/A</option>
+                    </select>
+                    <label for="txtDev1">Developer:</label>
+                    <input id="txtDev1" name="txtDev1" data-role="text box">
+                    <label for="datRelease1">Release Date:</label>
+                    <input type="date" id="datRelease1" name="datRelease1">
+                    <label for="datPurchase1">Purchase Date:</label>
+                    <input type="date" id="datPurchase1" name="datPurchase1">
+                    <label for="chkPlaying1">Are You Playing This?</label>
+                    <input type="checkbox" id="chkPlaying1" name="chkPlaying1" data-iconpos="left" data-inline="true">
+                    <label for="chkCompleted1">Have You Completed This?</label>
+                    <input type="checkbox" id="chkCompleted1" name="chkCompleted1" data-iconpos="left" data-inline="true">
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <button type="button" id="btnSaveGame" name="btnSaveGame" data-icon="plus" data-iconpos="left" data-inline="true" class="">Save</button>
+                        <button type="button" id="btnCancelGame" name="btnCancelGame" data-icon="delete" data-iconpos="left" data-inline="true" class="">Cancel</button>
+                    </div>
+                </form>
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <h4>&copy; 2016 Alex Galka & Brian Treichel</h4>
+            </footer>
+        </div>
+    <!--Page 6: Add consoles, specify details of your consoles-->
+        <div data-role="page" id="AGBTAddConsole" data-theme="b">
+            <header data-role="header" data-position="fixed">
+                <h1>Add a Game</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#AGBTCurrentlyPlaying" data-icon="bars">Currently Playing</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyGames" data-icon="grid">My Games</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyConsoles" data-icon="gear" class="ui-btn-active ui-state-persist">My Consoles</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTAboutPage" data-icon="eye">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="frmAddConsole" name="frmAddConsole">
+                    <label for="txtName1">Name:</label>
+                    <input id="txtName1" name="txtName1" data-role="text box">
+                    <label for="datConsolePurchase1">Purchase Date:</label>
+                    <input type="date" id="datConsolePurchase1" name="datConsolePurchase1">
+                    <label for="numControllers1">Number of Controllers:</label>
+                    <input id="numControllers1" name="numControllers1" data-role="text box">
+                    <label for="chkFavourite1">Favourite</label>
+                    <input type="checkbox" id="chkFavourite1" name="chkFavourite1" data-iconpos="left" data-inline="true">
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <button type="button" id="btnSaveConsole" name="btnSaveConsole" data-icon="plus" data-iconpos="left" data-inline="true" class="">Save</button>
+                        <button type="button" id="btnCancelConsole" name="btnCancelConsole" data-icon="delete" data-iconpos="left" data-inline="true" class="">Cancel</button>
+                    </div>
+                </form>
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <h4>&copy; 2016 Alex Galka & Brian Treichel</h4>
+            </footer>
+        </div>
+    <!--Page 7: Update a game's information-->
+        <div data-role="page" id="AGBTUpdateGame" data-theme="b">
+            <header data-role="header" data-position="fixed">
+                <h1>Add a Game</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#AGBTCurrentlyPlaying" data-icon="bars">Currently Playing</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyGames" data-icon="grid" class="ui-btn-active ui-state-persist">My Games</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyConsoles" data-icon="gear">My Consoles</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTAboutPage" data-icon="eye">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="frmUpdateGame" name="frmUpdateGame">
+                    <label for="txtTitle2">Title:</label>
+                    <input id="txtTitle2" name="txtTitle2" data-role="text box">
+                    <label for="cmboConsole2">Platform:</label>
+                    <select id="cmboConsole2" name="cmboConsole2" data-native-menu="false">
+                        <option value='0' selected>N/A</option>
+                    </select>
+                    <label for="txtDev2">Developer:</label>
+                    <input id="txtDev2" name="txtDev2" data-role="text box">
+                    <label for="datRelease2">Release Date:</label>
+                    <input type="date" id="datRelease2" name="datRelease2">
+                    <label for="datPurchase2">Purchase Date:</label>
+                    <input type="date" id="datPurchase2" name="datPurchase2">
+                    <label for="chkPlaying2">Are You Playing This?</label>
+                    <input type="checkbox" id="chkPlaying2" name="chkPlaying2" data-iconpos="left" data-inline="true">
+                    <label for="chkCompleted2">Have You Completed This?</label>
+                    <input type="checkbox" id="chkCompleted2" name="chkCompleted2" data-iconpos="left" data-inline="true">
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <button type="button" id="btnUpdateGame" name="btnUpdateGame" data-icon="plus" data-iconpos="left" data-inline="true" class="">Update</button>
+                        <button type="button" id="btnDeleteGame" name="btnDeleteGame" data-icon="minus" data-iconpos="left" data-inline="true" class="">Delete</button>
+                        <button type="button" id="btnCancelGame2" name="btnCancelGame2" data-icon="delete" data-iconpos="left" data-inline="true" class="">Cancel</button>
+                    </div>
+                </form>
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <h4>&copy; 2016 Alex Galka & Brian Treichel</h4>
+            </footer>
+        </div>
+    <!--Page 8: Update the information about your consoles-->
+        <div data-role="page" id="AGBTUpdateConsole" data-theme="b">
+            <header data-role="header" data-position="fixed">
+                <h1>Add a Game</h1>
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a href="#AGBTCurrentlyPlaying" data-icon="bars">Currently Playing</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyGames" data-icon="grid">My Games</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTMyConsoles" data-icon="gear" class="ui-btn-active ui-state-persist">My Consoles</a>
+                        </li>
+                        <li>
+                            <a href="#AGBTAboutPage" data-icon="eye">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="frmUpdateConsole" name="frmUpdateConsole">
+                    <label for="txtName2">Name:</label>
+                    <input id="txtName2" name="txtName2" data-role="text box">
+                    <label for="datConsolePurchase2">Purchase Date:</label>
+                    <input type="date" id="datConsolePurchase2" name="datConsolePurchase2">
+                    <label for="numControllers2">Number of Controllers:</label>
+                    <input id="numControllers2" name="numControllers2" data-role="text box">
+                    <label for="chkFavourite2">Favourite</label>
+                    <input type="checkbox" id="chkFavourite2" name="chkFavourite2" data-iconpos="left" data-inline="true">
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <button type="button" id="btnUpdateConsole" name="btnUpdateConsole" data-icon="plus" data-iconpos="left" data-inline="true" class="">Update</button>
+                        <button type="button" id="btnDeleteConsole" name="btnDeleteConsole" data-icon="minus" data-iconpos="left" data-inline="true" class="">Delete</button>
+                        <button type="button" id="btnCancelConsole2" name="btnCancelConsole2" data-icon="delete" data-iconpos="left" data-inline="true" class="">Cancel</button>
+                    </div>
+                </form>
+            </section>
+            <footer data-role="footer" data-position="fixed">
+                <h4>&copy; 2016 Alex Galka & Brian Treichel</h4>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+label.error{
+
+     color: #F00;
+
+     font-weight: bold;
+
+ }
+
+input.error,
+
+select.error,
+
+textarea.error {
+
+    border: 1px red solid;
+
+}
+#AGBTTitlePage
+{
+    position: absolute;
+    top: 40%;
+    height: 50%;
+    width: 100%;
+    text-align: center;
+    padding:0;
+}
